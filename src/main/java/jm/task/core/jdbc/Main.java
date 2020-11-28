@@ -3,6 +3,8 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
+import jm.task.core.jdbc.util.Util;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,6 +25,7 @@ public class Main {
         }
 
         UserService userService = new UserServiceImpl();
+        userService.dropUsersTable();
         userService.createUsersTable();
         userService.saveUser("Max", "Simons", (byte) 15);
         userService.saveUser("Maya", "Gogins", (byte) 25);
@@ -36,5 +39,6 @@ public class Main {
         }
         System.out.println("-----");
         userService.cleanUsersTable();
+        Util.shutdown();
     }
 }
